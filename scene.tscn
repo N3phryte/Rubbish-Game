@@ -12,31 +12,34 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2354"]
 albedo_texture = ExtResource("1_3253y")
-uv1_scale = Vector3(16, 16, 16)
+uv1_scale = Vector3(48, 48, 48)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ni31j"]
 material = SubResource("StandardMaterial3D_y2354")
-size = Vector2(100, 100)
+size = Vector2(300, 300)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3253y"]
 size = Vector3(100, 0.001, 100)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xlvrw"]
 panorama = ExtResource("2_u3cyc")
-energy_multiplier = 1.2
+energy_multiplier = 2.97
 
 [sub_resource type="Sky" id="Sky_73fnb"]
 sky_material = SubResource("PanoramaSkyMaterial_xlvrw")
 
 [sub_resource type="Environment" id="Environment_5juve"]
 background_mode = 2
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.65
 sky = SubResource("Sky_73fnb")
+sky_custom_fov = 76.0
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 2
-ssao_power = 3.56762
-ssao_detail = 5.0
-adjustment_contrast = 1.42
+ssao_radius = 1.75
+ssao_intensity = 14.95
+adjustment_enabled = true
+adjustment_brightness = 0.92
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u3cyc"]
 
@@ -80,16 +83,19 @@ environment = SubResource("Environment_5juve")
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
 script = ExtResource("3_m7jmp")
-speed = 20.0
+speed = 13.0
+jump_height = 2.0
+camera_sens = 4.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+visible = false
 mesh = SubResource("CapsuleMesh_u3cyc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_m7jmp")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="Bin" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 5)
@@ -103,23 +109,32 @@ texture = ExtResource("4_u3cyc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bin"]
 shape = SubResource("BoxShape3D_u3cyc")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Bin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0151596, 0.05198, 0.0874863)
+light_energy = 0.65
+light_negative = true
+
 [node name="UI" type="Node" parent="."]
 script = ExtResource("6_y2354")
 
-[node name="cleanup" type="Label" parent="UI"]
-offset_right = 168.0
+[node name="cleanup" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = -1.0
+offset_right = 177.0
 offset_bottom = 23.0
-scale = Vector2(2.54589, 1.97879)
+scale = Vector2(2.59844, 2.44444)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
 text = "clean up the rubbish!!"
 
-[node name="score" type="Label" parent="UI"]
-offset_left = 1.0
-offset_top = 41.0
-offset_right = 128.0
-offset_bottom = 64.0
+[node name="score" type="RichTextLabel" parent="UI"]
+offset_left = 7.0
+offset_top = 439.0
+offset_right = 254.0
+offset_bottom = 471.0
 scale = Vector2(1.88746, 1.56349)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
 text = "rubbish clean : 0"
 
 [node name="Sprite2D" type="Sprite2D" parent="UI"]

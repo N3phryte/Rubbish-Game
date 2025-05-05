@@ -13,7 +13,6 @@ config_version=5
 config/name="wastegame"
 run/main_scene="uid://x2lx71gqbrhe"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 
